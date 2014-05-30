@@ -17,7 +17,7 @@ local f2 = fonts.create("fonts/DroidSansMono.ttf", 18)
 -- font:text(text, r, g, b, a) -- ALPHA HAS NO EFFECT RIGHT NOW.
 local t1 = f1:text("Play Game")
 local t2 = f1:text("Options")
-local t3 = f1:text("Credits")
+--local t3 = f1:text("Credits")
 local t4 = f1:text("Exit")
 
 -- Create textures from image files.
