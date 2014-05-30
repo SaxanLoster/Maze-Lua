@@ -47,7 +47,7 @@ function on_update()
 	--bg:draw() -- Background textures must be drawn first.
 	b1:draw()
 	b2:draw()
-	b3:draw()
+	--b3:draw()
 	b4:draw()
 	end
 
