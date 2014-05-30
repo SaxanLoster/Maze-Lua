@@ -28,8 +28,8 @@ local bg = textures.text(f1,"",0,0,0,0)
 -- Create buttons from textures.
 local b1 = buttons.create_from_texture(t1, 125, 100)
 local b2 = buttons.create_from_texture(t2, 125, 150)
-local b3 = buttons.create_from_texture(t3, 125, 200)
-local b4 = buttons.create_from_texture(t4, 125, 250)
+--local b3 = buttons.create_from_texture(t3, 125, 200)
+local b4 = buttons.create_from_texture(t4, 125, 200)
 
 function on_touch(x, y)
 	if b1:contains(x, y) then 
