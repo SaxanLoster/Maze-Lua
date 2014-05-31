@@ -33,7 +33,7 @@ local b4 = buttons.create_from_texture(t4, 125, 200)
 
 function on_touch(x, y)
 	if b1:contains(x, y) then 
-		dofile('screens/game.lua')
+		dofile('screens/difficulty.lua')
 	elseif b2:contains(x, y) then
 		dofile('screens/options.lua')
 	--elseif b3:contains(x, y) then
