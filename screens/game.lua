@@ -33,9 +33,7 @@ local maze = {}
 local randomMaze = gameMode == 1 and mazeHold.getE() or gameMode == 2 and mazeHold.getM() or mazeHold.getH()
 
 function myHas( v , a )
-	for i = 1 , #a do
-		if v == a[i] then return true end
-		end
+	for i = 1 , #a do if v == a[i] then return true end end
 	return false
 	end
 
@@ -61,10 +59,7 @@ print( '( ' .. currentPosition.x .. ' , ' .. currentPosition.y .. ' )' )
 function on_update()
 	textures.image( 'images/path-' .. maze[currentPosition.x][currentPosition.y].v .. maze[currentPosition.x][currentPosition.y].s .. '.png' ):draw( tileStartX , tileStartY , tS , tS )
 	if maze[currentPosition.x][currentPosition.y].v == 'x' then arrow4:draw() end
-	if maze[currentPosition.x][currentPosition.y].v == 'y' then
-		fonts.create( 'fonts/DroidSansMono.ttf' , 48 ):text( 'You Win' ):draw( 100 , 100 )
-		gameOver = true
-		end
+	if maze[currentPosition.x][currentPosition.y].v == 'y' then fonts.create( 'fonts/DroidSansMono.ttf' , 48 ):text( 'You Win' ):draw( 100 , 100 ) ; gameOver = true end
 	if myHas( maze[currentPosition.x][currentPosition.y].v , { '1' , '3' , '5' , '7' , '9' , 'b' , 'd' , 'f' } ) then arrow1:draw() end
 	if myHas( maze[currentPosition.x][currentPosition.y].v , { '2' , '3' , '6' , '7' , 'a' , 'b' , 'e' , 'f' } ) then arrow2:draw() end
 	if myHas( maze[currentPosition.x][currentPosition.y].v , { '4' , '5' , '6' , '7' , 'c' , 'd' , 'e' , 'f' } ) then arrow4:draw() end
