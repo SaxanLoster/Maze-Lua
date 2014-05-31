@@ -36,8 +36,8 @@ function on_touch(x, y)
 		dofile('screens/game.lua')
 	elseif b2:contains(x, y) then
 		dofile('screens/options.lua')
-	elseif b3:contains(x, y) then
-		dofile('screens/credits.lua')
+	--elseif b3:contains(x, y) then
+	--	dofile('screens/credits.lua')
 	elseif b4:contains(x, y) then
 		quit()
 		end
