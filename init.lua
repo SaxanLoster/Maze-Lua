@@ -31,6 +31,18 @@ local b2 = buttons.create_from_texture(t2, 125, 150)
 --local b3 = buttons.create_from_texture(t3, 125, 200)
 local b4 = buttons.create_from_texture(t4, 125, 200)
 
+local s = {}
+for i = 1 , 5 do
+	s[ i ] = {}
+	for j = 1 , 5 do
+		s[ i ][ j ] = i * j
+		--print( s[ i ][ j ] )
+		end
+	end
+
+--table.insert( s , 'hello' )
+--print( #s )
+
 function on_touch(x, y)
 	if b1:contains(x, y) then 
 		dofile('screens/difficulty.lua')

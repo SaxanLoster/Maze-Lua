@@ -1,3 +1,4 @@
+--[[
 local mazesE = {}
 local mazesE_mt = {}
 mazesE_mt.__index = mazesE_mt;
@@ -24,12 +25,172 @@ mazesH_mt.__index = mazesH_mt;
 
 -- Hard Mazes
 	mazesH[1] = "0x000000000000000000000000000000000000000000000000000000000000003aaac02aaac0402aaaeaaa806a80402aeaaa80402aaac06aaa80406a802ac000000500000505000005000005000500050000050000050500000505000005002ac07aaaaafabac0407a80407a8050407a80403aeaead0506aeababa802ad000050500000500050505000505000505050005000505050505050000000005006afad06ac01040507abaaa9050405050502ad02a90107afa90106aaa802a900505050505000505050000000505050505000500000005050000050000000000101010107aaababafa80406abababa907a80506a802ad0106aeafa806a8040000000000500000005000505000000000500050500000500050505000500050040404040102aeac03aaad05040406aea902abad0406abaea9010106abaaa900505050500000505000005050505050500000005050500050000000500000000503ad0502ac0107a802ad0503abad0106a802abad05040106a802afa80400005000505000500050000050500000500050000000505050005000005000500003aaad0502abaeabaea80507a802ad06abaaa802abad07aaaba80403aea90400000050500000500050005050000050500000000000505000000050005000500406ad050404010407aeabafa80407aba804040406aba906a802abac0506a9005050505050500050505000500050500000505050500000500000005050500003a907ad07ad0405010104050407a90406a9050507aaaaafaaa802abafafa8000000505050505050000050505050005050005050500000500000000050500002aaa903a903afad02aaad0503ad06a907a807ababa802ad06aaaeaea903ac00000000000000505000005050005050005000500000000050500050500000500406aaaaaaac0501040403afaaababa807aaabaaaeaaa803aba80503ac0401005050000000505000505000500000000050000000500000000000500050500003a902aaac07afaea903aaabaea8040407aaaaa803aaa806aaa803a807ad0000000000005050505000000000500050505000000000000050000000005050000406a8040501010502aaac02afa807ababaeaeac06aaaaafaea802aaad07a8005050005050000050000050005000500000505050500000505000000050500003afaaabafaaaaafaeaeabaeabac07aaa8050107afaaa80107aaaaac0107a8000050000050000050505000500050500000500050500000005000005000500006ad0402aba802ad050106ad0403abaea807a80507aaaaac03aaa803a807a80050505000000000505000505050000050005000505000005000000000005000010503aeac02aea90502ad07afaeac07ac07a80507ac04010406ac02ac07ac000050005050005000500050505050505050500050505050005050500050505002a906ad03aaad040106a90501010505010102a90107aba807ad03aaa90501000000505000005050005000500000505000000000005000005050000000500002aaa90506aeabafa807a807aea80507aaa806a806afac06ad010406a80104000000005050500050005000505000505000005000505050505000505000005002aaaea9050102ad02afa80503ac0107aaaaafa8050507ad03aeafafa80405000000500050000050005000500050005000005000505050500050505000505006aaafac03ac02afa80106ad06afa807aaac07ac05050507a8010107aaaba900500050500050005000005050505000500050505050505050000000500000000506ad07a80506abaeac01050107a807ac01050501010507aeaaa807aaaea800505050500050500050500050005000505000505000005050500000500050000101010502a903ac0105040106afa80501040107aaa8050503a802afac03ac000000005000000050005050005050005000500050000050500000005050005002aeac01040402a906abafa8050102afaaad0407a8040507aaa806ad03a801000050500050500000500050005000005000505050005050500000505000000002ad03aaad03ac02afa803ac0106aaad06a90507aaa90503aaac0507aaaea8000050000050005000500000500050005050005050000050000050505000500002ad02aeafaaabaeabaea80106ad02ad03aead03aea807a806a90507a807a8000050005050000050005000005050005000505000500050005000505000500006a906a90502aaafac07ac04010102ad02ad07a80102aba807a80503a807a800500050005000005050505050000000500050500000000000500050000050000102afa807a8040505050503aaaaaaafa80107ac06a804040106afaea803a8000000500050005050505050000000005000005050500050500050505000000006ac0102a902abad0505010402aaaaad06a80107abaaaba904050103aaaea80050500000000000505050005000000050500000500000000050500000005000010506aaaaaaaea90103a803aaaaaeafabaaa8050406aaaaa907aeaea8050000005050000000500000000000000050500000005050500000005050500050000407ad06aeaaafaaaaaeaaaaa806ad07aaaeac03ababaaaea805010102afa8005050505050005000005000000050505000505000000000500050000000500003a901010102aba802aba802aaa90103a80103a802aaa803a803aaa802afa8000000000000000000000000000000000000000000000000000000000000y000"
+	--
 
 math.randomseed( os.time() )
 
+local function convert( maze , size )
+	for i = 1 , size do
+		for j = 1 , size do
+			print( maze[ i ][ j ] )
+			end
+		end
+	end
+
+local function makeMaze( size )
+	local n = size * size - 1
+	local horiz = {}
+	for i = 1 , size do
+		horiz[ i ] = {}
+		end
+	local verti = {}
+	for i = 1 , size do
+		verti[ i ] = {}
+		end
+	local h = { x = math.random( 1 , size ) , y = math.random( 1 , size ) }
+	print( h.x , h.y )
+	local path = { h }
+	local unvisited = {}
+	for i = 1 , size do
+		unvisited[ i ] = {}
+		for j = 1 , size do
+			print( i > 1 and i < size and j > 1 and j < size and ( i ~= h.x or j ~= h.y ) )
+			table.insert( unvisited[ i ] , ( i > 1 and i < size and j > 1 and ( i ~= h.x + 1 or j ~= h.y + 1 ) ) )
+			end
+		end
+	--print( h.x )
+	while 0 < n do
+		local potential = {}
+			potential[ 1 ] = { x = h.x + 1 , y = h.y     }
+			potential[ 2 ] = { x = h.x     , y = h.y + 1 }
+			potential[ 3 ] = { x = h.x - 1 , y = h.y     }
+			potential[ 4 ] = { x = h.x     , y = h.y - 1 }
+		local neighbors = {}
+		for i = 1 , 4 do
+			print( potential[ i ].x , potential[ i ].y )
+			if unvisited[ potential[ i ].x ][ potential[ i ].y ] then
+				table.insert( neighbors , potential[ i ] )
+				end
+			end
+		if #neighbors > 0 then
+			print( n )
+			n = n - 1
+			next = neighbors[ math.random( 1 , #neighbors ) ]
+			unvisited[ next.x + 1 ][ next.y + 1 ] = false
+			if next.x == h.x then
+				horiz[ next.x ][ ( next.y + h.y - 1 ) / 2 ] = true
+			else
+				verti[ ( next.x + h.x - 1 ) / 2 ][ next.y ] = true
+				end
+		else
+			here = path[ #path ]
+			path[ #path ] = nil
+			end
+		end
+		return { x = size , y = size , horiz = horiz , verti = verti }
+	end
+
+
+]]--
+
+
+local mazegenerator = {}
+
+-- Returns true if the 1-based x and y coordaintes are within the maze.
+function insideMaze(x, y, w, h)
+	return x >= 1 and y >= 1 and x <= w and y <= h
+	end
+
+-- Adds a square to a neighborhood.
+function addSquare(maze, neighbors, x, y)
+	if insideMaze(x, y, maze.width, maze.height) and maze[y][x] == 0 then
+		neighbors[#neighbors+1] = {x, y}
+		end
+	end
+
+-- Help function for detecting a bit pattern.
+function hasbit(x, p) 
+	return x % (p + p) >= p 
+	end
+
+-- Puts up a wall in the maze, given standing in x, y position and looking in a direction.
+-- The direction is set by 0 (right), 1 (down), 2 (left), 3 (up).
+function mazegenerator.setWall(maze, x, y, direction)
+	if not insideMaze(x, y, maze.width, maze.height) then return end
+
+	local val = maze[y][x]
+	if hasbit(val, 2^direction) then
+		maze[y][x] = val - 2^direction
+		end
+	end
+
+-- Knocks down wall without checking the current state,
+-- since all walls are set up when starting to generate the maze.
+function knockDownWall(maze, x1, y1, x2, y2)
+	local isRight = x1 < x2
+	local isDown  = y1 < y2
+	local isLeft  = x1 > x2
+	local isUp    = y1 > y2
+	if isRight then
+		maze[y1][x1] = maze[y1][x1] + 2
+		maze[y2][x2] = maze[y2][x2] + 8
+	elseif isDown then
+		maze[y1][x1] = maze[y1][x1] + 4
+		maze[y2][x2] = maze[y2][x2] + 1
+	elseif isLeft then
+		maze[y1][x1] = maze[y1][x1] + 8
+		maze[y2][x2] = maze[y2][x2] + 2
+	elseif isUp then
+		maze[y1][x1] = maze[y1][x1] + 1
+		maze[y2][x2] = maze[y2][x2] + 4
+		end
+	end
+
+-- Create a maze by knocking down walls until all cells are connected.
+function mazegenerator.createMaze(w, h)
+	assert(w, "Missing argument 'w'")
+	assert(h, "Missing argument 'h'")
+
+	local maze = {width = w, height = h}
+	for y = 1, h do
+		maze[y] = {}
+		for x = 1, w do
+			maze[y][x] = 0
+			end
+		end
+
+	local stack = {{math.random(w), math.random(h)}}
+	while #stack > 0 do
+		local currentSquare = stack[#stack]
+		local x, y = currentSquare[1], currentSquare[2]
+		local neighbors = {}
+		addSquare(maze, neighbors, x+1, y)
+		addSquare(maze, neighbors, x, y+1)
+		addSquare(maze, neighbors, x-1, y)
+		addSquare(maze, neighbors, x, y-1)
+
+		if #neighbors == 0 then
+			table.remove(stack, #stack)
+		else
+			local randomNeighbor = neighbors[math.random(#neighbors)]
+			knockDownWall(maze, x, y, randomNeighbor[1], randomNeighbor[2])
+			stack[#stack+1] = randomNeighbor
+			end
+		end
+
+	return maze
+	end
+
+return mazegenerator
+
+
+--[[
+
+
 local function getE()
-	local r = math.random( 1 , #mazesE )
-	print( r )
+	convert( makeMaze( 7 ) , 7 )
+	--local r = math.random( 1 , #mazesE )
+	--print( r )
 	return mazesE[r]
 	end
 
@@ -50,3 +211,5 @@ return {
 	getM = getM ,
 	getH = getH
 	}
+
+	]]--
