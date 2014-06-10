@@ -62,7 +62,6 @@ function mazegenerator.createMaze( w , h )
 		end
 	
 	local stack  = { { math.random( w ) , math.random( h ) } }
-	local finish = { math.random( w ) , h                }
 
 	while #stack > 0 do
 		local currentSquare = stack[ #stack ]
@@ -83,9 +82,8 @@ function mazegenerator.createMaze( w , h )
 			end
 		end
 
-	--print( finish[1] )
-	print( 'Finish: ' .. finish[ 1 ] .. ' , ' .. finish[ 2 ] )
-	maze[ 3 ][ finish[ 2 ] ] = 16
+	maze[ w ][ h ] = maze[ w ][ h ] + 2
+
 	return maze
 
 	end

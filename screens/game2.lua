@@ -12,8 +12,8 @@
 	local sSY = app_height
 
 -- Maze Size
-	local mSX = 3
-	local mSY = 3
+	local mSX = gameMode == 1 and 3 or gameMode == 2 and 32 or 64
+	local mSY = gameMode == 1 and 3 or gameMode == 2 and 32 or 64
 
 -- Tile and Arrow Size
 	local aS = 100
@@ -39,24 +39,19 @@ function myHas( v , a )
 currentPosition = { x = 1 , y = 1 }
 
 function on_update()
-	textures.image( 'images/path-' .. maze[currentPosition.x][currentPosition.y] .. '.png' ):draw( tileStartX , tileStartY , tS , tS )
-	if maze[currentPosition.x][currentPosition.y] == 16 then fonts.create( 'fonts/DroidSansMono.ttf' , 48 ):text( 'You Win' ):draw( 100 , 100 ) ; gameOver = true end
-	if myHas( maze[currentPosition.x][currentPosition.y] , {  1 ,  3 ,  5 ,  7 ,  9 , 11 , 13 , 15 } ) then arrow1:draw() end
-	if myHas( maze[currentPosition.x][currentPosition.y] , {  2 ,  3 ,  6 ,  7 , 10 , 11 , 14 , 15 } ) then arrow2:draw() end
-	if myHas( maze[currentPosition.x][currentPosition.y] , {  4 ,  5 ,  6 ,  7 , 12 , 13 , 14 , 15 } ) then arrow4:draw() end
-	if myHas( maze[currentPosition.x][currentPosition.y] , {  8 ,  9 , 10 , 11 , 12 , 13 , 14 , 15 } ) then arrow8:draw() end
+	textures.image( 'images/path-' .. maze[ currentPosition.x ][ currentPosition.y ] .. '.png' ):draw( tileStartX , tileStartY , tS , tS )
+	if currentPosition.x > sSX or currentPosition.y > sSY then fonts.create( 'fonts/DroidSansMono.ttf' , 48 ):text( 'You Win' ):draw( 100 , 100 ) ; gameOver = true end
+	if myHas( maze[ currentPosition.x ][ currentPosition.y ] , {  1 ,  3 ,  5 ,  7 ,  9 , 11 , 13 , 15 } ) then arrow1:draw() end
+	if myHas( maze[ currentPosition.x ][ currentPosition.y ] , {  2 ,  3 ,  6 ,  7 , 10 , 11 , 14 , 15 } ) then arrow2:draw() end
+	if myHas( maze[ currentPosition.x ][ currentPosition.y ] , {  4 ,  5 ,  6 ,  7 , 12 , 13 , 14 , 15 } ) then arrow4:draw() end
+	if myHas( maze[ currentPosition.x ][ currentPosition.y ] , {  8 ,  9 , 10 , 11 , 12 , 13 , 14 , 15 } ) then arrow8:draw() end
 	end
 
 function on_touch( x , y )
-	if gameOver then dofile( 'init.lua' ) end
-	if false then
-	elseif arrow1:contains( x , y ) and myHas( maze[currentPosition.x][currentPosition.y] , {  1 ,  3 ,  5 ,  7 ,  9 , 11 , 13 , 15 } ) then currentPosition.y = currentPosition.y - 1
-	elseif arrow2:contains( x , y ) and myHas( maze[currentPosition.x][currentPosition.y] , {  2 ,  3 ,  6 ,  7 , 10 , 11 , 14 , 15 } ) then currentPosition.x = currentPosition.x + 1
-	elseif arrow4:contains( x , y ) and myHas( maze[currentPosition.x][currentPosition.y] , {  4 ,  5 ,  6 ,  7 , 12 , 13 , 14 , 15 } ) then currentPosition.y = currentPosition.y + 1
-	elseif arrow8:contains( x , y ) and myHas( maze[currentPosition.x][currentPosition.y] , {  8 ,  9 , 10 , 11 , 12 , 13 , 14 , 15 } ) then currentPosition.x = currentPosition.x - 1 end
-	if currentPosition.x < 1 then currentPosition.x = 1 end
-	if currentPosition.y < 1 then currentPosition.y = 1 end
-	if currentPosition.x > sSX then currentPosition.x = sSX end
-	if currentPosition.y > sSY then currentPosition.y = sSY end
+	if gameOver then dofile( 'init.lua' )
+	elseif arrow1:contains( x , y ) and myHas( maze[ currentPosition.x ][ currentPosition.y ] , {  1 ,  3 ,  5 ,  7 ,  9 , 11 , 13 , 15 } ) then currentPosition.y = currentPosition.y - 1
+	elseif arrow2:contains( x , y ) and myHas( maze[ currentPosition.x ][ currentPosition.y ] , {  2 ,  3 ,  6 ,  7 , 10 , 11 , 14 , 15 } ) then currentPosition.x = currentPosition.x + 1
+	elseif arrow4:contains( x , y ) and myHas( maze[ currentPosition.x ][ currentPosition.y ] , {  4 ,  5 ,  6 ,  7 , 12 , 13 , 14 , 15 } ) then currentPosition.y = currentPosition.y + 1
+	elseif arrow8:contains( x , y ) and myHas( maze[ currentPosition.x ][ currentPosition.y ] , {  8 ,  9 , 10 , 11 , 12 , 13 , 14 , 15 } ) then currentPosition.x = currentPosition.x - 1 end
 	print ( '( ' .. currentPosition.x .. ' , ' .. currentPosition.y .. ' )' )
 	end

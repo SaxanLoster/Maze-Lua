@@ -17,9 +17,9 @@ local b3 = buttons.create_from_texture( t3 , 125 , 200 )
 gameMode = 1
 
 function on_touch( x , y )
-	if     b1:contains( x , y ) then gameMode = 1 ; dofile( 'screens/game.lua' )
-	elseif b2:contains( x , y ) then gameMode = 2 ; dofile( 'screens/game.lua' )
-	elseif b3:contains( x , y ) then gameMode = 3 ; dofile( 'screens/game.lua' ) end
+	if     b1:contains( x , y ) then gameMode = 1 ; dofile( 'screens/game2.lua' )
+	elseif b2:contains( x , y ) then gameMode = 2 ; dofile( 'screens/game2.lua' )
+	elseif b3:contains( x , y ) then gameMode = 3 ; dofile( 'screens/game2.lua' ) end
 	end
 
 function on_update()
