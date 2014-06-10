@@ -12,8 +12,8 @@
 	local sSY = app_height
 
 -- Maze Size
-	local mSX = gameMode == 1 and 3 or gameMode == 2 and 32 or 64
-	local mSY = gameMode == 1 and 3 or gameMode == 2 and 32 or 64
+	local mSX = gameMode == 1 and 16 or gameMode == 2 and 32 or 64
+	local mSY = gameMode == 1 and 16 or gameMode == 2 and 32 or 64
 
 -- Tile and Arrow Size
 	local aS = 100
